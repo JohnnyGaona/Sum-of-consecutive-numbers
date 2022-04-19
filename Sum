@@ -1,0 +1,40 @@
+"""Modulo para el ingreso de datos"""
+def ingresoDatos ():
+  numero = input("Ingrese datos para sumar: ")
+  
+  """Esta variable sirve para eliminar los datos alfabeticos"""
+  characters = "'!?abcdefghijklmnñopqrstuvwxyz,.ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+
+  """Compara cada termino y si encuentra una letra la remplaza por el siguiente"""
+  for x in range(len(characters)):
+    numero = numero.replace(characters[x],"")
+  
+  """print(numero)"""
+  return numero 
+
+"""Mosulo para separar datos"""
+def separadorDatos():
+  """Variable para identificar espacio entre terminos"""
+  separador = " "
+  
+  """split remueve todos los terminos iguales a la variable ingresada"""
+  """Se guarda como un arreglo, lista"""
+  separado_por_espacios = ingresoDatos().split(separador)
+  
+  return separado_por_espacios
+
+"""Mosulo para limpiar espacios extras"""
+def limpiezaDatos():
+  datos = separadorDatos()
+  for blanco in datos:
+    if blanco == "":
+      datos.remove("")
+      for blanco2 in datos:
+        if blanco2 == "":
+          datos.remove("")
+  return datos
+
+
+"""Utilizamos este metodo para convertir los datos del arreglo en numericos"""
+newLis = [float(string) for string in limpiezaDatos()]
+print(f"La suma es: {sum(newLis)}")
